@@ -128,7 +128,7 @@
         /// <summary>
         /// Run the process
         /// </summary>
-        public sealed void Run()
+        public void Run()
         {
             // Assemble the process
             this.AssembleProcess();
