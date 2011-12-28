@@ -25,6 +25,16 @@
         private StringBuilder messageBuilder;
 
         /// <summary>
+        /// The ConstructProcessDelegate for the process
+        /// </summary>
+        private ConstructProcessDelegate processConstruction;
+
+        /// <summary>
+        /// The ConstructStartInfoDelegate for the process
+        /// </summary>
+        private ConstructStartInfoDelegate startInfoConstruction;
+
+        /// <summary>
         /// Initializes a new instance of the ProcessBase class.
         /// </summary>
         /// <param name="processLocation">The location of process to be executed</param>
@@ -37,8 +47,8 @@
             this.ProcessLocation = processLocation;
             this.ProcessArguments = processArguments;
             this.WorkingDirectory = workingDirectory;
-            this.ProcessConstruction = new ConstructProcessDelegate(this.ConstructProcess);
-            this.StartInfoConstruction = new ConstructStartInfoDelegate(this.ConstructStartInfo);
+            this.processConstruction = new ConstructProcessDelegate(this.ConstructProcess);
+            this.startInfoConstruction = new ConstructStartInfoDelegate(this.ConstructStartInfo);
         }
 
         /// <summary>
@@ -70,7 +80,7 @@
         /// Gets the exit code passed from the process
         /// </summary>
         public int ExitCode { get; private set; }
-        
+
         /// <summary>
         /// Gets the location of process to be executed.
         /// </summary>
@@ -87,16 +97,6 @@
         public string WorkingDirectory { get; private set; }
 
         /// <summary>
-        /// Gets or sets the ConstructProcessDelegate for the process
-        /// </summary>
-        public ConstructProcessDelegate ProcessConstruction { get; set; }
-
-        /// <summary>
-        /// Gets or sets the ConstructStartInfoDelegate for the process
-        /// </summary>
-        public ConstructStartInfoDelegate StartInfoConstruction { get; set; }
-
-        /// <summary>
         /// Gets any messages returned when executing the process
         /// </summary>
         public string Messages
@@ -108,12 +108,30 @@
         }
 
         /// <summary>
+        /// Overrides the default process creation method
+        /// </summary>
+        /// <param name="constructProcessMethod">The ConstructProcessDelegate implementation to replace the default with.</param>
+        public void OverrideProcessConstruction(ConstructProcessDelegate constructProcessMethod)
+        {
+            this.processConstruction = constructProcessMethod;
+        }
+
+        /// <summary>
+        /// Overrides the default start info creation method
+        /// </summary>
+        /// <param name="constructStartInfoMethod">The ConstructStartInfoDelegate implementation to replace the default with.</param>
+        public void OverrideStartInfoConstruction(ConstructStartInfoDelegate constructStartInfoMethod)
+        {
+            this.startInfoConstruction = constructStartInfoMethod;
+        }
+
+        /// <summary>
         /// Sets up the process ready to be run. This must be run before running a process.
         /// </summary>
         protected void AssembleProcess()
         {
-            this.startInfo = this.StartInfoConstruction(this.ProcessArguments, this.WorkingDirectory);
-            this.process = this.ProcessConstruction(this.startInfo);
+            this.startInfo = this.startInfoConstruction(this.ProcessArguments, this.WorkingDirectory);
+            this.process = this.processConstruction(this.startInfo);
             this.process.ErrorDataReceived += this.MessageHandler;
             this.process.Exited += this.ProcessExited;
             this.process.OutputDataReceived += this.MessageHandler;
