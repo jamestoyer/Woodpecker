@@ -126,6 +126,21 @@
         }
 
         /// <summary>
+        /// Run the process
+        /// </summary>
+        public sealed void Run()
+        {
+            // Assemble the process
+            this.AssembleProcess();
+
+            // Run the process
+            process.Start();
+            process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.WaitForExit();
+        }
+
+        /// <summary>
         /// Sets up the process ready to be run. This must be run before running a process.
         /// </summary>
         protected void AssembleProcess()
