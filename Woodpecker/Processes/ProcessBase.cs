@@ -40,7 +40,7 @@
         /// <param name="processLocation">The location of process to be executed</param>
         /// <param name="processArguments">The arguments that will be passed to the process</param>
         /// <param name="workingDirectory">The directory the process will execute within</param>
-        public ProcessBase(string processLocation, string processArguments, string workingDirectory)
+        protected ProcessBase(string processLocation, string processArguments, string workingDirectory)
         {
             this.messageBuilder = new StringBuilder();
             this.process = new Process();

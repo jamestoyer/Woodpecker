@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Git\Parameters.cs" />
+    <Compile Include="Git\Process.cs" />
     <Compile Include="Git\Result.cs" />
     <Compile Include="Processes\ProcessBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
