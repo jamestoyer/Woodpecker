@@ -16,10 +16,10 @@
        public string DestinationLocation { get; set; }
 
        /// <summary>
-       /// Determines whether this instance and a specified object, which must also be a SourceCodeParameters object, have the same value.
+       /// Determines whether this instance and a specified object, which must also be a Parameters object, have the same value.
        /// </summary>
-       /// <param name="obj">The SourceCodeParameters to compare to this instance.</param>
-       /// <returns>true if obj is a SourceCodeParameters and its value is the same as this instance; otherwise, false.</returns>
+       /// <param name="obj">The Parameters to compare to this instance.</param>
+       /// <returns>true if obj is a Parameters and its value is the same as this instance; otherwise, false.</returns>
        public override bool Equals(object obj)
        {
            var actual = obj as Parameters;
@@ -27,10 +27,10 @@
        }
 
        /// <summary>
-       /// Determines whether this instance and another specified SourceCodeParameters object have the same value.
+       /// Determines whether this instance and another specified Parameters object have the same value.
        /// </summary>
-       /// <param name="other">The SourceCodeParameters to compare to this instance.</param>
-       /// <returns>true if other is a SourceCodeParameters and its value is the same as this instance; otherwise, false.</returns>
+       /// <param name="other">The Parameters to compare to this instance.</param>
+       /// <returns>true if other is a Parameters and its value is the same as this instance; otherwise, false.</returns>
        public bool Equals(Parameters other)
        {
            if (other == null)
