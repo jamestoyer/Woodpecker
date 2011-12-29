@@ -39,5 +39,14 @@
                     base.Equals(other);
             }
         }
+
+        /// <summary>
+        /// Returns the hash code for this Result.
+        /// </summary>
+        /// <returns>A hash code for the current Result</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
