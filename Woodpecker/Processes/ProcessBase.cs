@@ -134,10 +134,10 @@
             this.AssembleProcess();
 
             // Run the process
-            process.Start();
-            process.BeginErrorReadLine();
-            process.BeginOutputReadLine();
-            process.WaitForExit();
+            this.process.Start();
+            this.process.BeginErrorReadLine();
+            this.process.BeginOutputReadLine();
+            this.process.WaitForExit();
         }
 
         /// <summary>
